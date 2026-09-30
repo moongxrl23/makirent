@@ -1,0 +1,27 @@
+{% extends "maquinaria/base.html" %}
+{% load static %}
+{% block contenido %}
+<section class="hero">
+  <h1>Maquinaria pesada lista cuando la obra lo exige</h1>
+  <p>Retroexcavadoras, grúas, compactadores y generadores por día, con entrega en la faena y soporte durante todo el arriendo.</p>
+  <a class="btn" href="{% url 'maquinas' %}">Ver catálogo</a>
+</section>
+<h2>Disponibles esta semana</h2>
+<div class="tarjetas">
+  {% for m in destacadas %}
+  <article class="tarjeta">
+    {% if m.imagen_url %}
+      <img class="foto" src="{% static m.imagen_url %}" alt="{{ m.nombre }}">
+    {% else %}
+      <div class="foto foto-icono"><i class="bi {{ m.icono }}"></i></div>
+    {% endif %}
+    <div class="cuerpo">
+      <h3>{{ m.nombre }}</h3>
+      <p>{{ m.descripcion }}</p>
+      <strong>${{ m.precio_dia }} / día</strong>
+    </div>
+  </article>
+  {% empty %}<p>Aún no hay máquinas. Ejecuta <code>python manage.py cargar_datos</code>.</p>
+  {% endfor %}
+</div>
+{% endblock %}

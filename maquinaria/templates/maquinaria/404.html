@@ -1,0 +1,12 @@
+{% extends "maquinaria/base.html" %}
+{% block titulo %}Página no encontrada{% endblock %}
+{% block contenido %}
+<!-- Reemplaza el 404 técnico por una vista amigable con redirección -->
+<section class="hero">
+  <h1>404 · Esta página no existe</h1>
+  <p>La dirección que buscas no está disponible. Te llevamos de vuelta al inicio.</p>
+  <a class="btn" href="{% url 'inicio' %}">Volver al inicio</a>
+</section>
+<!-- Redirección automática a los 5 segundos -->
+<script>setTimeout(() => window.location.href = "{% url 'inicio' %}", 5000);</script>
+{% endblock %}

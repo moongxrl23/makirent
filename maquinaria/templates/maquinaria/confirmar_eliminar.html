@@ -1,0 +1,9 @@
+{% extends "maquinaria/base.html" %}
+{% block contenido %}
+<h1>¿Eliminar "{{ object }}"?</h1>
+<form method="post">
+  {% csrf_token %}
+  <button class="btn peligro-btn" type="submit">Sí, eliminar</button>
+  <a href="javascript:history.back()">Cancelar</a>
+</form>
+{% endblock %}

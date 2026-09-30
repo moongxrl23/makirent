@@ -1,0 +1,199 @@
+/* =========================================================
+   MaquiRent — identidad industrial 
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* ---- COLORES:  ---- */
+  --carbon:   #14171b;   /* fondo oscuro principal (header, hero) */
+  --carbon-2: #20252b;   /* fondo oscuro secundario (franjas, footer) */
+  --acero:    #6b7684;   /* gris metálico (texto secundario) */
+  --amarillo: #f2b705;   /* amarillo de faena (acento principal) */
+  --naranja:  #d94a1c;   /* naranja de advertencia (precios, eliminar) */
+  --hueso:    #f4f1ea;   /* fondo claro de la página */
+
+  /* ---- TIPOGRAFÍAS ---- */
+  --fuente-titulo: 'Oswald', 'Arial Narrow', sans-serif;
+  --fuente-texto:  'Inter', Arial, sans-serif;
+
+  --linea: #e3ded2;
+  --texto: #23262b;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--fuente-texto);
+  background: var(--hueso);
+  color: var(--texto);
+  line-height: 1.5;
+}
+h1, h2, h3, .logo, .btn {
+  font-family: var(--fuente-titulo);
+  letter-spacing: 0.01em;
+}
+a { color: inherit; }
+
+/* ---------- Encabezado ---------- */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--carbon);
+  padding: 16px 40px;
+  border-top: 6px solid var(--amarillo);
+  position: relative;
+}
+.nav::after {
+  /* Franja de "cinta de peligro". */
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: -6px;
+  height: 6px;
+  background: repeating-linear-gradient(
+    -45deg, var(--amarillo) 0 14px, var(--carbon) 14px 28px
+  );
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--amarillo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav nav a {
+  color: var(--hueso);
+  margin-left: 22px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+.nav nav a:hover { border-color: var(--amarillo); color: var(--amarillo); }
+.nav nav a.api { color: var(--acero); }
+
+/* ---------- Contenido ---------- */
+main { max-width: 1080px; margin: 0 auto; padding: 0 20px 60px; min-height: 60vh; }
+
+h1 { font-size: 2.1rem; margin: 0 0 6px; }
+h2 { font-size: 1.3rem; text-transform: uppercase; color: var(--acero); margin: 0 0 18px; }
+
+/* ---------- Hero (portada) ---------- */
+.hero {
+  background: var(--carbon);
+  background-image: linear-gradient(rgba(20,23,27,.75), rgba(20,23,27,.9)), url("../img/fondo.png");
+  background-size: cover;
+  background-position: center;
+  color: var(--hueso);
+  padding: 70px 44px 84px;
+  margin: 40px 0;
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+}
+.hero h1 { font-size: 2.6rem; max-width: 18ch; margin-bottom: 14px; }
+.hero p { max-width: 46ch; color: #cfd3d8; font-size: 1.05rem; }
+
+.btn {
+  display: inline-block;
+  background: var(--amarillo);
+  color: var(--carbon);
+  padding: 12px 26px;
+  border: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.1s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+
+/* ---------- Fichas de máquina destacada (con foto) ---------- */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  margin-top: 10px;
+}
+.tarjeta {
+  background: #fff;
+  border: 1px solid var(--linea);
+  overflow: hidden;
+}
+.tarjeta .foto {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  background: var(--carbon-2); /* color de relleno si no hay foto */
+}
+.tarjeta .foto-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  color: var(--amarillo);
+}
+.icono-fila {
+  font-size: 1.4rem;
+  color: var(--acero);
+}
+.tarjeta .cuerpo { padding: 16px 18px; }
+.tarjeta h3 { margin: 0 0 8px; font-size: 1.05rem; }
+.tarjeta p { margin: 0 0 12px; color: var(--acero); font-size: 0.92rem; }
+.tarjeta strong { color: var(--naranja); font-size: 1.05rem; }
+
+/* ---------- Tablas de listados ---------- */
+table { width: 100%; border-collapse: collapse; margin-top: 18px; }
+th {
+  background: var(--carbon);
+  color: var(--amarillo);
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+th, td { padding: 12px 14px; border-bottom: 1px solid var(--linea); }
+td.foto-celda img { width: 56px; height: 40px; object-fit: cover; }
+tr:hover td { background: #ece7d9; }
+.peligro { color: var(--naranja); font-weight: 500; text-decoration: none; }
+.peligro:hover { text-decoration: underline; }
+.peligro-btn { background: var(--naranja); color: var(--hueso); }
+
+/* ---------- Formularios ---------- */
+.form { background: #fff; padding: 28px; max-width: 520px; border: 1px solid var(--linea); }
+.form p { margin: 0 0 14px; }
+.form label { display: block; font-size: 0.85rem; color: var(--acero); margin-bottom: 4px; }
+.form input:not([type=checkbox]), .form select, .form textarea {
+  width: 100%; padding: 9px 10px; border: 1px solid var(--linea);
+  font-family: inherit; font-size: 0.95rem;
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+  outline: 2px solid var(--amarillo); outline-offset: 1px;
+}
+
+footer {
+  text-align: center;
+  padding: 22px;
+  background: var(--carbon);
+  color: var(--acero);
+  font-size: 0.85rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+}
+
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .nav nav a { margin-left: 0; margin-right: 16px; }
+  .hero { clip-path: none; padding: 40px 24px; }
+}

@@ -1,70 +1,50 @@
-# MaquiRent – Arriendo de maquinaria (Django + DRF + PostgreSQL)
+# MakiRent - Sistema de arriendo de maquinaria
 
-## Requisitos
-- Python 3.x
-- Docker Desktop (abierto y corriendo)
+Proyecto para el ramo de Backend (INACAP). Sistema web para arrendar maquinaria pesada (excavadoras, grúas, compactadores, generadores), hecho con Django y Django REST Framework.
 
-## Pasos, en orden
+## Cómo levantarlo
 
-### 1. Abrir la carpeta en una terminal
-En Visual Studio Code: abre la carpeta del proyecto y abre una terminal (Terminal > Nueva terminal).
-Debe quedar posicionada donde está `manage.py` (junto a `docker-compose.yml`).
+Necesitas tener Docker Desktop abierto y Python instalado.
 
-### 2. Levantar PostgreSQL con Docker
-```
+Levantar la base de datos:
+
 docker compose up -d
-```
-Verifica que quedó corriendo:
-```
-docker ps
-```
-Debe aparecer un contenedor con imagen `postgres:16` y estado "Up".
 
-### 3. Instalar dependencias de Python
-```
+
+Instalar las librerías:
+
 pip install -r requirements.txt
-```
 
-### 4. Verificar la conexión (opcional pero recomendado)
-```
-python diagnostico_pg.py
-```
-Debe imprimir `CONEXION OK`. Si no, revisa la sección "Problemas comunes" más abajo.
 
-### 5. Crear las tablas y cargar datos de prueba
-```
+Crear las tablas y cargar datos de prueba:
+
 python manage.py makemigrations maquinaria
 python manage.py migrate
 python manage.py cargar_datos
-```
 
-### 6. Levantar el servidor
-```
+
+Correr el servidor:
+
 python manage.py runserver
-```
-Abre en el navegador: http://127.0.0.1:8000/
 
-Páginas: `/`, `/maquinas/`, `/clientes/`, `/arriendos/`, `/contacto/` · API: `/api/`
 
-Para ver el 404 personalizado (Django lo oculta si `DEBUG=True`):
-```
-$env:DEBUG="False"; python manage.py runserver
-```
-y visita cualquier URL que no exista, ej: http://127.0.0.1:8000/algo-que-no-existe/
+Y entrar a http://127.0.0.1:8000/
 
-## Problemas comunes
+## Qué tiene
 
-**"docker: command not found" o similar**
-Docker Desktop no está abierto, o no terminó de iniciar. Ábrelo y espera a que la ballena del ícono deje de animarse.
+- Landing page, catálogo de máquinas, clientes y arriendos, todo con templates (sin usar el admin de Django)
+- Se puede crear, editar y eliminar máquinas, clientes y arriendos
+- Página de error 404 personalizada
+- API REST en /api/
+- Base de datos en PostgreSQL (corriendo en un contenedor Docker)
+- Datos de prueba precargados
 
-**`diagnostico_pg.py` muestra un error de autenticación**
-Puede haber otro PostgreSQL instalado en el PC (no debería pasar en uno limpio, pero si instalaste
-PostgreSQL por fuera de Docker en algún momento, revisa `Get-Service *postgres*` en PowerSHell
-y detén ese servicio: `Stop-Service nombre-del-servicio` en una PowerShell como Administrador).
+## Estructura
 
-**Quiero borrar todo y empezar de cero con la base de datos**
-```
-docker compose down -v
-docker compose up -d
-```
-(el `-v` borra también los datos guardados; útil si algo quedó mal configurado)
+- `maquinaria/models.py` - los modelos (Maquina, Cliente, Arriendo)
+- `maquinaria/views.py` - las vistas
+- `maquinaria/templates/` - los HTML
+- `maquinaria/static/` - CSS e imágenes
+
+Nombre: Valentina Alvarado
+Carrera: Analista Programador - INACAP

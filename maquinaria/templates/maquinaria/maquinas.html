@@ -1,0 +1,26 @@
+{% extends "maquinaria/base.html" %}
+{% load static %}
+{% block contenido %}
+<h1>Catálogo de máquinas</h1>
+<h2>Estado y disponibilidad de la flota</h2>
+<a class="btn" href="{% url 'maquina_nueva' %}">+ Nueva máquina</a>
+<table>
+  <tr><th></th><th>Nombre</th><th>Categoría</th><th>Precio/día</th><th>Estado</th><th></th></tr>
+  {% for m in maquinas %}
+  <tr>
+    <td class="foto-celda">
+      {% if m.imagen_url %}
+        <img src="{% static m.imagen_url %}" alt="{{ m.nombre }}">
+      {% else %}
+        <i class="bi {{ m.icono }} icono-fila"></i>
+      {% endif %}
+    </td>
+    <td>{{ m.nombre }}</td>
+    <td>{{ m.get_categoria_display }}</td>
+    <td>${{ m.precio_dia }}</td>
+    <td>{% if m.disponible %}Disponible{% else %}Arrendada{% endif %}</td>
+    <td><a href="{% url 'maquina_editar' m.pk %}">Editar</a> · <a class="peligro" href="{% url 'maquina_eliminar' m.pk %}">Eliminar</a></td>
+  </tr>
+  {% empty %}<tr><td colspan="6">Sin máquinas registradas.</td></tr>{% endfor %}
+</table>
+{% endblock %}
